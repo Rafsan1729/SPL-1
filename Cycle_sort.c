@@ -1,16 +1,11 @@
-/* cycle_sort.c - step-by-step Cycle Sort demo
- * Build: gcc -Wall -Wextra -o cycle_sort cycle_sort.c   Run: ./cycle_sort */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #define MAX_N 20
 
-/* ------------------------------------------------------------------ */
-/* Small UI helpers                                                    */
-/* ------------------------------------------------------------------ */
 
-static int step_mode = 1; /* 1 = wait for ENTER after each step, 0 = run straight through */
+static int step_mode = 1; 
 
 static void line(char c, int len)
 {
@@ -27,7 +22,7 @@ static void clear_input(void)
     }
 }
 
-/* Reads an int in [lo, hi]; keeps asking until valid. */
+
 static int read_int(const char *prompt, int lo, int hi)
 {
     int v;
@@ -49,8 +44,6 @@ static int read_int(const char *prompt, int lo, int hi)
         printf("  Invalid input. Enter a number between %d and %d.\n", lo, hi);
     }
 }
-
-/* Waits for the user between steps (if step mode is on). */
 static void pause_step(void)
 {
     if (!step_mode)
@@ -64,10 +57,7 @@ static void pause_step(void)
     printf("\n");
 }
 
-/*
- * Prints the array as boxes with an index row.
- * mark1 / mark2 are indices to highlight with a label (-1 = none).
- */
+
 static void print_array(const int a[], int n, int mark1, const char *label1,
                         int mark2, const char *label2)
 {
@@ -93,8 +83,6 @@ static void print_array(const int a[], int n, int mark1, const char *label1,
     if (mark2 >= 0 && mark2 != mark1)
         printf("         ^ at index %d = %s\n", mark2, label2);
 }
-
-/* Lets the user type an array, or use a built-in sample. */
 static int read_array(int a[], int need_sorted)
 {
     printf("\nInput options:\n");
@@ -171,8 +159,6 @@ static void cycle_sort_demo(void)
     for (int cycle_start = 0; cycle_start <= n - 2; cycle_start++)
     {
         int item = a[cycle_start];
-
-        /* Step A: find where 'item' belongs */
         int pos = cycle_start;
         for (int i = cycle_start + 1; i < n; i++)
         {
@@ -192,12 +178,6 @@ static void cycle_sort_demo(void)
             pause_step();
             continue;
         }
-
-        /* Skip duplicates */
-        while (item == a[pos])
-            pos++;
-
-        /* Put the item in its right place */
         int tmp = a[pos];
         a[pos] = item;
         item = tmp;
@@ -206,8 +186,6 @@ static void cycle_sort_demo(void)
                ++step, a[pos], pos, item, writes);
         print_array(a, n, pos, "just written", cycle_start, "cycle start");
         pause_step();
-
-        /* Rotate the rest of the cycle */
         while (pos != cycle_start)
         {
             pos = cycle_start;
