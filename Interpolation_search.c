@@ -1,16 +1,10 @@
-/* interpolation_search.c - step-by-step Interpolation Search demo
- * Build: gcc -Wall -Wextra -o interpolation_search interpolation_search.c   Run: ./interpolation_search */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #define MAX_N 20
 
-/* ------------------------------------------------------------------ */
-/* Small UI helpers                                                    */
-/* ------------------------------------------------------------------ */
-
-static int step_mode = 1; /* 1 = wait for ENTER after each step, 0 = run straight through */
+static int step_mode = 1; 
 
 static void line(char c, int len) {
     for (int i = 0; i < len; i++) putchar(c);
@@ -21,8 +15,6 @@ static void clear_input(void) {
     int c;
     while ((c = getchar()) != '\n' && c != EOF) { }
 }
-
-/* Reads an int in [lo, hi]; keeps asking until valid. */
 static int read_int(const char *prompt, int lo, int hi) {
     int v;
     for (;;) {
@@ -37,8 +29,6 @@ static int read_int(const char *prompt, int lo, int hi) {
         printf("  Invalid input. Enter a number between %d and %d.\n", lo, hi);
     }
 }
-
-/* Waits for the user between steps (if step mode is on). */
 static void pause_step(void) {
     if (!step_mode) return;
     printf("  [Press ENTER for next step, or type 'r' + ENTER to run to the end] ");
@@ -47,11 +37,6 @@ static void pause_step(void) {
     if (c != '\n' && c != EOF) clear_input();
     printf("\n");
 }
-
-/*
- * Prints the array as boxes with an index row.
- * mark1 / mark2 are indices to highlight with a label (-1 = none).
- */
 static void print_array(const int a[], int n, int mark1, const char *label1,
                         int mark2, const char *label2) {
     printf("  index: ");
@@ -68,8 +53,6 @@ static void print_array(const int a[], int n, int mark1, const char *label1,
     if (mark1 >= 0) printf("         ^ at index %d = %s\n", mark1, label1);
     if (mark2 >= 0 && mark2 != mark1) printf("         ^ at index %d = %s\n", mark2, label2);
 }
-
-/* Lets the user type an array, or use a built-in sample. */
 static int read_array(int a[], int need_sorted) {
     printf("\nInput options:\n");
     printf("  [1] Enter my own array\n");
@@ -147,7 +130,6 @@ static void interpolation_search_demo(void) {
             pos = low;
             printf("  -> A[low] == A[high], cannot divide. pos = low = %d\n", pos);
         } else {
-            /* use long long so (x - A[low]) * (high - low) cannot overflow */
             long long num = (long long)(x - a[low]) * (high - low);
             long long den = (long long)(a[high] - a[low]);
             pos = low + (int)(num / den);
