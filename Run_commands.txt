@@ -1,0 +1,10 @@
+1.*****For algorithm visualizer command after ctrl+alt+N  :
+cd "c:\Users\VICTUS\OneDrive\Desktop\SPL1\Algorithm_Visualizer"   
+.\visualizer.exe
+
+2.*****For BST_Visualizer command after ctrl+alt+N :
+cd "c:\Users\VICTUS\OneDrive\Desktop\SPL1\BST_Visualizer"
+.\bst.exe
+
+3.*****For dijkstra's Algorithm Simply run Ctrl+alt+N.
+4.*****Cycle sort,pancake sort and Interpolation search can be run using Ctrl+Alt+N.
